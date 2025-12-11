@@ -1,0 +1,186 @@
+
+# Python Basics for the API Support Lab
+
+This guide covers the essential Python skills needed to run scripts, measure latency, parse data, and handle API errors in this lab. These patterns are commonly used by Support Engineers for diagnostics and troubleshooting.
+
+---
+
+## 1. Running Python scripts
+
+Open a terminal in your project and run:
+
+```
+python script_name.py
+```
+
+To print output on screen:
+
+```python
+print("Hello from the lab")
+```
+
+---
+
+## 2. Loops (for i in range)
+
+Used to repeat API calls, measure timing, or analyze logs:
+
+```python
+for i in range(5):
+    print("Request #", i)
+```
+
+---
+
+## 3. Sending API requests
+
+Use the `requests` library to call the lab’s API:
+
+```python
+import requests
+
+url = "http://localhost:3000/api/process"
+payload = {"text": "Hello world"}
+
+resp = requests.post(url, json=payload)
+print(resp.status_code)
+print(resp.json())
+```
+
+### Why use `json={}`  
+It automatically:
+- Converts the Python dict to JSON  
+- Sets `Content-Type: application/json`  
+
+---
+
+## 4. Measuring latency (response time)
+
+This is essential to detect slow endpoints, performance problems, or timeouts.
+
+```python
+import time
+import requests
+
+url = "http://localhost:3000/api/process"
+latencies = []
+
+for i in range(10):
+    start = time.time()
+    resp = requests.post(url, json={"debug": "slow_api_response"})
+    elapsed_ms = (time.time() - start) * 1000
+    latencies.append(elapsed_ms)
+    print(f"{i}: {resp.status_code} in {elapsed_ms:.1f} ms")
+
+print("Average:", sum(latencies) / len(latencies), "ms")
+print("Min:", min(latencies), "ms")
+print("Max:", max(latencies), "ms")
+```
+
+This helps identify:
+- Slow 200s  
+- Latency spikes  
+- API performance patterns  
+
+---
+
+## 5. Parsing JSON responses
+
+Almost all APIs return JSON. Convert responses like this:
+
+```python
+data = resp.json()
+print("Error:", data.get("error"))
+print("Message:", data.get("message"))
+```
+
+If the response is NOT valid JSON, you need to catch it:
+
+```python
+import json
+
+try:
+    data = resp.json()
+except json.JSONDecodeError:
+    print("Server returned non-JSON data:", resp.text)
+```
+
+---
+
+## 6. Reading CSV log files
+
+This is how Support Engineers analyze logs exported in CSV format.
+
+Example with `logs/api_logs.csv`:
+
+```python
+import csv
+
+with open("logs/api_logs.csv", newline="") as f:
+    reader = csv.DictReader(f)
+    total = 0
+    errors = 0
+
+    for row in reader:
+        total += 1
+        status = int(row["status_code"])
+        if status >= 400:
+            errors += 1
+
+print("Total requests:", total)
+print("Total errors:", errors)
+```
+
+This will be used later when you analyze your log files.
+
+---
+
+## 7. Basic try / except patterns
+
+Support Engineers MUST handle network failures safely.
+
+### Handling network errors
+
+```python
+import requests
+
+try:
+    resp = requests.post(url, json={"text": "Hello"})
+    print(resp.status_code, resp.text)
+except requests.exceptions.RequestException as e:
+    print("Network error:", e)
+```
+
+### Handling JSON decoding errors
+
+```python
+try:
+    data = resp.json()
+except ValueError:
+    print("Invalid JSON:", resp.text)
+```
+
+### Handling timeouts
+
+```python
+try:
+    resp = requests.post(url, json={"text": "Hello"}, timeout=2)
+except requests.exceptions.Timeout:
+    print("The request timed out")
+```
+
+---
+
+## 8. Putting everything together
+
+These Python basics let you:
+
+- Diagnose API issues  
+- Test different error modes  
+- Measure performance  
+- Validate responses  
+- Read logs  
+- Catch incorrect behavior  
+
+This is the exact level of scripting expected for a Support Engineering role.
+```

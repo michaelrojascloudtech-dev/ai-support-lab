@@ -1,0 +1,4 @@
+Hello, 
+
+This is a simple text file.
+Michael uses it to read it with Python. 

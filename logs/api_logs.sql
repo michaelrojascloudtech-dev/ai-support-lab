@@ -1,0 +1,35 @@
+DROP TABLE IF EXISTS api_logs;
+
+CREATE TABLE api_logs (
+  request_id   TEXT,
+  timestamp    TEXT,
+  endpoint     TEXT,
+  method       TEXT,
+  region       TEXT,
+  status_code  INTEGER,
+  latency_ms   INTEGER,
+  error_type   TEXT,
+  plan_tier    TEXT
+);
+
+INSERT INTO api_logs (request_id,timestamp,endpoint,method,region,status_code,latency_ms,error_type,plan_tier) VALUES
+('req_0001','2025-11-20T10:01:15Z','/api/process','POST','us-east',200,145,'','pro'),
+('req_0002','2025-11-20T10:01:47Z','/api/process','POST','us-east',400,98,'missing_text','free'),
+('req_0003','2025-11-20T10:02:03Z','/api/voices','GET','eu-west',200,212,'','free'),
+('req_0004','2025-11-20T10:02:30Z','/api/process','POST','ap-south',500,982,'internal_server_error','pro'),
+('req_0005','2025-11-20T10:03:11Z','/api/voices','GET','us-east',404,67,'not_found','free'),
+('req_0006','2025-11-20T10:03:44Z','/api/process','POST','eu-west',429,755,'rate_limit','pro'),
+('req_0007','2025-11-20T10:04:02Z','/api/process','POST','us-east',200,321,'','enterprise'),
+('req_0008','2025-11-20T10:04:39Z','/api/login','POST','us-east',401,134,'invalid_api_key','free'),
+('req_0009','2025-11-21T15:11:05Z','/api/process','POST','ap-south',200,512,'','pro'),
+('req_0010','2025-11-21T15:11:37Z','/api/process','POST','eu-west',422,643,'unprocessable_entity','free'),
+('req_0011','2025-11-21T15:12:10Z','/api/usage','GET','us-east',200,89,'','pro'),
+('req_0012','2025-11-21T15:12:48Z','/api/process','POST','us-east',413,1103,'payload_too_large','pro'),
+('req_0013','2025-11-21T15:13:19Z','/api/process','POST','eu-west',200,276,'','free'),
+('req_0014','2025-11-22T09:45:01Z','/api/voices/123','GET','us-east',200,132,'','free'),
+('req_0015','2025-11-22T09:45:37Z','/api/process','POST','ap-south',408,1500,'timeout','free'),
+('req_0016','2025-11-22T09:46:05Z','/api/process','POST','us-east',409,345,'conflict','enterprise'),
+('req_0017','2025-11-22T09:46:41Z','/api/process','POST','eu-west',200,229,'','pro'),
+('req_0018','2025-11-22T09:47:10Z','/api/process','POST','us-east',500,2012,'internal_server_error','pro'),
+('req_0019','2025-11-22T09:47:55Z','/api/voices','GET','ap-south',200,187,'','free'),
+('req_0020','2025-11-22T09:48:33Z','/api/usage','GET','eu-west',200,94,'','enterprise');

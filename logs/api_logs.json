@@ -1,0 +1,91 @@
+[
+  {
+    "request_id": "req_0001",
+    "timestamp": "2025-11-20T10:01:15Z",
+    "endpoint": "/api/process",
+    "method": "POST",
+    "region": "us-east",
+    "status_code": 200,
+    "latency_ms": 145,
+    "error_type": "",
+    "plan_tier": "pro"
+  },
+  {
+    "request_id": "req_0002",
+    "timestamp": "2025-11-20T10:01:47Z",
+    "endpoint": "/api/process",
+    "method": "POST",
+    "region": "us-east",
+    "status_code": 400,
+    "latency_ms": 98,
+    "error_type": "missing_text",
+    "plan_tier": "free"
+  },
+  {
+    "request_id": "req_0003",
+    "timestamp": "2025-11-20T10:02:03Z",
+    "endpoint": "/api/voices",
+    "method": "GET",
+    "region": "eu-west",
+    "status_code": 200,
+    "latency_ms": 212,
+    "error_type": "",
+    "plan_tier": "free"
+  },
+  {
+    "request_id": "req_0004",
+    "timestamp": "2025-11-20T10:02:30Z",
+    "endpoint": "/api/process",
+    "method": "POST",
+    "region": "ap-south",
+    "status_code": 500,
+    "latency_ms": 982,
+    "error_type": "internal_server_error",
+    "plan_tier": "pro"
+  },
+  {
+    "request_id": "req_0005",
+    "timestamp": "2025-11-20T10:03:11Z",
+    "endpoint": "/api/voices",
+    "method": "GET",
+    "region": "us-east",
+    "status_code": 404,
+    "latency_ms": 67,
+    "error_type": "not_found",
+    "plan_tier": "free"
+  },
+  {
+    "request_id": "req_0006",
+    "timestamp": "2025-11-20T10:03:44Z",
+    "endpoint": "/api/process",
+    "method": "POST",
+    "region": "eu-west",
+    "status_code": 429,
+    "latency_ms": 755,
+    "error_type": "rate_limit",
+    "plan_tier": "pro"
+  },
+  {
+    "request_id": "req_0007",
+    "timestamp": "2025-11-20T10:04:02Z",
+    "endpoint": "/api/process",
+    "method": "POST",
+    "region": "us-east",
+    "status_code": 200,
+    "latency_ms": 321,
+    "error_type": "",
+    "plan_tier": "enterprise"
+  },
+  {
+    "request_id": "req_0008",
+    "timestamp": "2025-11-20T10:04:39Z",
+    "endpoint": "/api/login",
+    "method": "POST",
+    "region": "us-east",
+    "status_code": 401,
+    "latency_ms": 134,
+    "error_type": "invalid_api_key",
+    "plan_tier": "free"
+  }
+]
+
